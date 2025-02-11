@@ -1,9 +1,9 @@
-import { getDatabase } from "../dbConnections.js";
+import Transaction from "../models/Transaction.js";
 
 // Get all transactions
 export const getAllTransactions = async (req, res) => {
     try {
-        const transactions = await getDatabase().Transaction.find().populate("transactionType");
+        const transactions = await Transaction.find().populate("transactionType").populate("user");
         res.json(transactions);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -13,7 +13,7 @@ export const getAllTransactions = async (req, res) => {
 // Get a single transaction by ID
 export const getTransactionById = async (req, res) => {
     try {
-        const transaction = await getDatabase().Transaction.findById(req.params.id).populate("transactionType").populate("user");
+        const transaction = await Transaction.findById(req.params.id).populate("transactionType").populate("user");
         if (!transaction) {
             return res.status(404).json({ error: "Transaction not found" });
         }
@@ -26,7 +26,7 @@ export const getTransactionById = async (req, res) => {
 // Add a new transaction
 export const addTransaction = async (req, res) => {
     try {
-        const transaction = new (getDatabase().Transaction)(req.body);
+        const transaction = new Transaction(req.body);
         await transaction.save();
         res.status(201).json(transaction);
     } catch (error) {
@@ -37,13 +37,13 @@ export const addTransaction = async (req, res) => {
 // Edit a transaction
 export const updateTransaction = async (req, res) => {
     try {
-        const transaction = await getDatabase().Transaction.findByIdAndUpdate(
+        const transaction = await Transaction.findByIdAndUpdate(
             req.params.id,
             req.body,
             { new: true, runValidators: true }
         );
         if (!transaction) {
-            return res.status(404).json({ error: "getDatabase().Transaction not found" });
+            return res.status(404).json({ error: "Transaction not found" });
         }
         res.json(transaction);
     } catch (error) {
@@ -54,7 +54,7 @@ export const updateTransaction = async (req, res) => {
 // Delete a transaction
 export const deleteTransaction = async (req, res) => {
     try {
-        const transaction = await getDatabase().Transaction.findByIdAndDelete(req.params.id);
+        const transaction = await Transaction.findByIdAndDelete(req.params.id);
         if (!transaction) {
             return res.status(404).json({ error: "Transaction not found" });
         }

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const schema = new mongoose.Schema({
+const transactionSchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: { type: String },
     startDate: { type: Date, required: true },
@@ -27,7 +27,7 @@ const schema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-schema.pre("save", function (next) {
+transactionSchema.pre("save", function (next) {
     if (this.amount !== undefined) {
         const roundedAmount = parseFloat(this.amount).toFixed(2);
         this.amount = mongoose.Types.Decimal128.fromString(roundedAmount);
@@ -36,7 +36,7 @@ schema.pre("save", function (next) {
 });
 
 
-schema.set("toJSON", {
+transactionSchema.set("toJSON", {
     transform: (doc, ret) => {
         ret.amount = parseFloat(ret.amount.toString());
         delete ret.__v;
@@ -44,7 +44,7 @@ schema.set("toJSON", {
     }
 });
 
-schema.set("toObject", {
+transactionSchema.set("toObject", {
     transform: (doc, ret) => {
         ret.amount = parseFloat(ret.amount.toString());
         delete ret.__v;
@@ -52,4 +52,6 @@ schema.set("toObject", {
     }
 });
 
-export const transactionSchema = schema;
+const Transaction = mongoose.model('Transaction', transactionSchema);
+
+export default Transaction;

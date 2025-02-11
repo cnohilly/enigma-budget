@@ -1,9 +1,9 @@
-import { getDatabase } from "../dbConnections.js";
+import TransactionType from "../models/TransactionType.js";
 
 // Get all transaction types
 export const getAllTransactionTypes = async (req, res) => {
     try {
-        const types = await getDatabase().TransactionType.find();
+        const types = await TransactionType.find();
         res.json(types);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -13,7 +13,7 @@ export const getAllTransactionTypes = async (req, res) => {
 // Add a new transaction type
 export const addTransactionType = async (req, res) => {
     try {
-        const type = new getDatabase().TransactionType(req.body);
+        const type = new TransactionType(req.body);
         await type.save();
         res.status(201).json(type);
     } catch (error) {
@@ -24,7 +24,7 @@ export const addTransactionType = async (req, res) => {
 // Edit a transaction type
 export const updateTransactionType = async (req, res) => {
     try {
-        const type = await getDatabase().TransactionType.findByIdAndUpdate(
+        const type = await TransactionType.findByIdAndUpdate(
             req.params.id,
             req.body,
             { new: true, runValidators: true }
@@ -41,7 +41,7 @@ export const updateTransactionType = async (req, res) => {
 // Delete a transaction type
 export const deleteTransactionType = async (req, res) => {
     try {
-        const type = await getDatabase().TransactionType.findByIdAndDelete(req.params.id);
+        const type = await TransactionType.findByIdAndDelete(req.params.id);
         if (!type) {
             return res.status(404).json({ error: "Transaction type not found" });
         }

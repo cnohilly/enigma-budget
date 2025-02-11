@@ -1,4 +1,5 @@
 import express from "express";
+import protect from 'enigma-user-management/middleware/authMiddleware.js';
 import {
     getAllTransactionTypes,
     addTransactionType,
@@ -8,9 +9,9 @@ import {
 
 const router = express.Router();
 
-router.get("/", getAllTransactionTypes);
-router.post("/", addTransactionType);
-router.put("/:id", updateTransactionType);
-router.delete("/:id", deleteTransactionType);
+router.get("/", protect, getAllTransactionTypes);
+router.post("/", protect, addTransactionType);
+router.put("/:id", protect, updateTransactionType);
+router.delete("/:id", protect, deleteTransactionType);
 
 export default router;

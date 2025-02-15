@@ -16,8 +16,6 @@ const AuthPage = () => {
     });
     const navigate = useNavigate();
 
-    console.log(errors);
-
     // Called on form submission
     const onSubmit = async (data) => {
         console.log('login');

@@ -2,9 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
+import Test from './Test';
 
 const theme = createTheme({
   palette: {
@@ -28,9 +26,8 @@ const App = () => {
       <CssBaseline />
       <Router>
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="/" element={<Test />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </ThemeProvider>

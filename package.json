@@ -12,8 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^7.4.0",
-    "enigma-user-management": "^1.0.0"
+    "concurrently": "^7.4.0"
   },
   "dependencies": {
     "bcrypt": "^5.1.1"

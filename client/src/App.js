@@ -27,7 +27,6 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Test />} />
-          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </ThemeProvider>

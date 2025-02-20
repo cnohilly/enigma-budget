@@ -1,0 +1,13 @@
+// Default variable overrides
+$primary: #0099ff;
+$secondary: #9b9ea0;
+$success: #2dce89;
+$info: #11cdef;
+$warning: #ffd600;
+$danger: #db0909;
+$light: #d7dadc;
+$dark: #212529;
+
+// Required
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/@yaireo/tagify/src/tagify.scss";

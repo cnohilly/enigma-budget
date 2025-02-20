@@ -1,36 +1,71 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import Test from './Test';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#2196f3', // blue
-    },
-    background: {
-      default: '#000000', // black
-      paper: '#121212',
-    },
-    text: {
-      primary: '#ffffff',
-    },
-  },
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
+import Home from "./pages/Home";
+
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import SingleProject from "./pages/SingleProject";
+import ProfileMain from "./pages/ProfileMain";
+
+const httpLink = createHttpLink({
+  uri: "/graphql",
 });
 
-const App = () => {
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem("id_token");
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
+function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <ApolloProvider client={client}>
       <Router>
-        <Routes>
-          <Route path="/" element={<Test />} />
-        </Routes>
-      </Router>
-    </ThemeProvider>
+        <div className="app-container d-flex flex-column dark-main-bg">
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/single-project/:id" element={<SingleProject />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/profile" >
+                <Route
+                  path=""
+                  element={<ProfileMain />}
+                />
+                <Route
+                  path=":username"
+                  element={<ProfileMain />}
+                />
+              </Route>
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router >
+    </ApolloProvider >
   );
-};
+}
 
 export default App;

@@ -1,0 +1,209 @@
+:root {
+  --dark-shade: #1b1b2b;
+  --dark-accent: #27293d;
+  --dark-header: #12121a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* scrollbar style */
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #32383d;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--bs-success);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #30f7a1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Rubik", "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.app-container {
+  min-height: 100vh;
+}
+
+.container {
+  transition: all ease-in-out 0.3s;
+}
+
+.scroll-margin {
+  scroll-margin-top: 4rem;
+}
+
+/* back to top button */
+.back-to-top {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 20;
+  border: black;
+  background-color: rgb(0, 0, 0, 0.6);
+  backdrop-filter: blur(1px);
+}
+
+/* nav link active color */
+.navbar-nav .show>.nav-link,
+.navbar-nav .nav-link.active {
+  color: var(--bs-success);
+}
+
+footer a:hover,
+footer i:hover {
+  color: var(--bs-success) !important;
+  transition: all ease-in-out 0.2s;
+}
+
+.dark-main-bg {
+  background: linear-gradient(var(--dark-shade), #101018);
+}
+
+.dark-card-bg {
+  background-color: var(--dark-accent);
+}
+
+.header-bg-color {
+  background-color: var(--dark-header);
+}
+
+.brand {
+  font-family: 'Bebas Neue', cursive;
+}
+
+#hero h1,
+#hero,
+h2 {
+  text-shadow: 0px 0px 2px rgb(0, 0, 0);
+}
+
+/* hero animations */
+.animatespan {
+  display: inline-block;
+}
+
+.custom-delay-1 {
+  animation-delay: .75s;
+}
+
+.custom-delay-2 {
+  animation-delay: 1.5s;
+}
+
+.custom-delay-3 {
+  animation-delay: 2s;
+}
+
+.custom-delay-4 {
+  animation-delay: 2.5s;
+}
+
+.custom-delay-5 {
+  animation-delay: 3s;
+}
+
+.custom-delay-6 {
+  animation-delay: 3.5s;
+}
+
+.bg-animation {
+  background-image: linear-gradient(109.6deg, rgba(18, 18, 26, 1) 21.6%, rgba(39, 41, 61, 1) 33.8%, rgba(18, 18, 26, 1) 47.8%, rgba(18, 18, 26, 1) 61.1%, rgba(39, 41, 61, 1) 73.8%, rgba(18, 18, 26, 1) 86.7%);
+  background-size: 400% 400%;
+  animation: gradient 30s ease-in-out infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* card background */
+.card {
+  background-color: var(--dark-accent) !important;
+}
+
+.card-header,
+#hero {
+  background-color: var(--dark-header) !important;
+}
+
+/* Project Form */
+select {
+  max-width: fit-content;
+}
+
+/* FORM */
+#signUpForm .form-textarea,
+#loginForm .form-textarea {
+  display: block;
+}
+
+#signUpForm .form-label,
+#loginForm .form-label {
+  display: block;
+  font-size: 1.2rem;
+  margin: 0.625rem 0 0.25rem;
+}
+
+#signUpForm .form-input,
+#loginForm .form-input {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.2rem 0;
+  font-size: 1.2rem;
+  border: 2px solid;
+  border-radius: 50px;
+}
+
+.tagify__input,
+.tagify__input::after {
+  color: inherit;
+}
+
+.tagify__input::before,
+.tagify__input:focus:empty::before {
+  color: gray;
+}
+
+.ar1x1 {
+  aspect-ratio: 1/1;
+}

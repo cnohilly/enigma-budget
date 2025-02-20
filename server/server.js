@@ -7,6 +7,7 @@ import transactionTypeRoutes from "./routes/transactionTypeRoutes.js";
 // import userRoutes from "./routes/userRoutes.js";
 import userRoutes from 'enigma-user-management/routes/userRoutes.js';
 import authRoutes from 'enigma-user-management/routes/authRoutes.js';
+import path from 'path';
 
 dotenv.config();
 
@@ -21,6 +22,13 @@ app.use("/api/transactions", transactionRoutes);
 app.use("/api/transaction-types", transactionTypeRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')));
+}
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 // Connect to MongoDB and start server
 const PORT = process.env.PORT || 5000;

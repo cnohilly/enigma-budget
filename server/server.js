@@ -10,6 +10,7 @@ import authRoutes from 'enigma-user-management/routes/authRoutes.js';
 import path from 'path';
 
 dotenv.config();
+const __dirname = import.meta.dirname;
 
 const app = express();
 
@@ -32,7 +33,6 @@ app.get('*', (req, res) => {
 
 // Connect to MongoDB and start server
 const PORT = process.env.PORT || 5000;
-
 mongoose.connect(process.env.MONGO_DB_URI).then(() => {
     console.log('Connected to DB');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
